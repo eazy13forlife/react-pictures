@@ -1,0 +1,32 @@
+.pictures {
+  display: grid;
+  grid-template-columns: 90%;
+  grid-template-rows: 20px auto;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.pictures-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-auto-rows: 1px;
+  grid-column-gap: 0.5em;
+  justify-content: center;
+}
+
+.pictures-container.error {
+  display: flex;
+  color: red;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.image {
+  box-shadow: 3px 2px 5px lightgrey;
+}
+.image img {
+  width: 250px;
+}
+
+.loader {
+  padding-left: 5em;
+}

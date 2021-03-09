@@ -1,0 +1,16 @@
+form {
+  width: 50%;
+}
+.field {
+  display: inline;
+}
+.field input[type="text"] {
+  padding: 0.5em;
+  width: 80%;
+  padding-left: 1em;
+}
+
+form button {
+  padding: 0.5em;
+  width: 20%;
+}
