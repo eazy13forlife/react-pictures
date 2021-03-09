@@ -1,0 +1,7 @@
+const types = {
+  FETCH_PICTURES: "FETCH_PICTURES",
+  IS_LOADING: "IS_LOADING",
+  HAS_PICTURES_ERROR: "HAS_PICTURES_ERROR",
+};
+
+export default types;
