@@ -1,12 +1,12 @@
 import types from "../actions/types.js";
 
-const isLoadingReducer = (state = false, action) => {
+const searchTermReducer = (state = "", action) => {
   switch (action.type) {
-    case types.UPDATE_LOADING:
+    case types.SET_SEARCH_TERM:
       return action.payload;
     default:
       return state;
   }
 };
 
-export default isLoadingReducer;
+export default searchTermReducer;

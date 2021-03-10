@@ -2,13 +2,24 @@ import React from "react";
 import "./PicturesContainer.css";
 import ImageCard from "../ImageCard/ImageCard.js";
 import Loader from "../Loader/Loader.js";
+import { useSelector, useDispatch, useStore } from "react-redux";
 
-const PicturesContainer = ({
-  pictures,
-  picturesError,
-  loading,
-  searchValue,
-}) => {
+const PicturesContainer = () => {
+  const searchTerm = useSelector((state) => {
+    return state.searchTerm;
+  });
+
+  const pictures = useSelector((state) => {
+    return state.pictures;
+  });
+  const isLoading = useSelector((state) => {
+    return state.isLoading;
+  });
+
+  const hasPicturesError = useSelector((state) => {
+    return state.hasPicturesError;
+  });
+
   const renderedPictures = pictures.map((object) => {
     return (
       <ImageCard
@@ -20,17 +31,17 @@ const PicturesContainer = ({
   });
 
   const renderErrorClass = () => {
-    if ((picturesError || !pictures.length) && !loading) {
+    if ((hasPicturesError || !pictures.length) && !isLoading) {
       return "error";
     }
     return "";
   };
 
   const renderPictures = () => {
-    if (picturesError && !loading) {
-      return <p>{picturesError}</p>;
-    } else if (!pictures.length && !loading) {
-      return <p>{`No pictures could be found for ""${searchValue}"`}</p>;
+    if (hasPicturesError && !isLoading) {
+      return <p>There was an error accessing your images</p>;
+    } else if (!pictures.length && !isLoading) {
+      return <p>{`No images could be found for ""${searchTerm}"`}</p>;
     } else {
       return renderedPictures;
     }
@@ -38,7 +49,7 @@ const PicturesContainer = ({
 
   return (
     <div className="pictures">
-      {loading ? <Loader message={`Searching for ${searchValue}`} /> : null}
+      {isLoading ? <Loader message={`Searching for ${searchTerm}`} /> : null}
       <div className={`pictures-container ${renderErrorClass()} `}>
         {renderPictures()}
       </div>

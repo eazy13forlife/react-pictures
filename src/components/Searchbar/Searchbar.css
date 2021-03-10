@@ -3,14 +3,35 @@ form {
 }
 .field {
   display: inline;
+  position: relative;
+}
+.field i {
+  display: none;
 }
 .field input[type="text"] {
   padding: 0.5em;
   width: 80%;
   padding-left: 1em;
+  border: 1px solid black;
 }
 
 form button {
   padding: 0.5em;
   width: 20%;
+}
+.field.error .error-message {
+  position: absolute;
+  color: red;
+}
+
+.field.error input {
+  background-color: rgb(253, 162, 162);
+}
+
+.field.error i {
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: red;
 }
