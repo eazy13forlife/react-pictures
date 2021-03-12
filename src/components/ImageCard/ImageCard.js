@@ -1,20 +1,25 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fixSpan } from "../../actions/";
 
-const ImageCard = ({ image, description }) => {
-  const [span, setSpan] = useState(0);
+const ImageCard = ({ image, description, id }) => {
+  const dispatch = useDispatch();
   const imageRef = useRef();
+  const spanNumber = useSelector((state) => {
+    return state.spans[id];
+  });
 
   useEffect(() => {
+    const setSpans = () => {
+      const height = imageRef.current.clientHeight;
+      const numberOfSpans = Math.ceil(height / 1) + 10;
+      dispatch(fixSpan(id, numberOfSpans));
+    };
     imageRef.current.addEventListener("load", setSpans);
-  }, []);
+  }, [dispatch, id]);
 
-  const setSpans = () => {
-    const height = imageRef.current.clientHeight;
-    const numberOfSpans = Math.ceil(height / 1) + 10;
-    setSpan(numberOfSpans);
-  };
   return (
-    <div className="image" style={{ gridRowEnd: `span ${span}` }}>
+    <div className="image" style={{ gridRowEnd: `span ${spanNumber}` }}>
       <img src={image} alt="description" ref={imageRef} />
     </div>
   );

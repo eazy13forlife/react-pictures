@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { useDispatch } from "react-redux";
 import { fetchPictures, setSearchTerm } from "../../actions/";

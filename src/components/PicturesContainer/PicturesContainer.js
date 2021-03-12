@@ -1,24 +1,37 @@
 import React from "react";
+import { createSelector } from "reselect";
+
 import "./PicturesContainer.css";
 import ImageCard from "../ImageCard/ImageCard.js";
 import Loader from "../Loader/Loader.js";
-import { useSelector, useDispatch, useStore } from "react-redux";
+import { useSelector } from "react-redux";
+
+const getStates = createSelector(
+  (state) => {
+    return state.searchTerm;
+  },
+  (state) => {
+    return state.pictures;
+  },
+  (state) => {
+    return state.isLoading;
+  },
+  (state) => {
+    return state.hasPicturesError;
+  },
+  (searchTerm, pictures, isLoading, hasPicturesError) => {
+    return { searchTerm, pictures, isLoading, hasPicturesError };
+  }
+);
+
+console.log(getStates);
 
 const PicturesContainer = () => {
-  const searchTerm = useSelector((state) => {
-    return state.searchTerm;
-  });
-
-  const pictures = useSelector((state) => {
-    return state.pictures;
-  });
-  const isLoading = useSelector((state) => {
-    return state.isLoading;
-  });
-
-  const hasPicturesError = useSelector((state) => {
-    return state.hasPicturesError;
-  });
+  const { searchTerm, pictures, isLoading, hasPicturesError } = useSelector(
+    (state) => {
+      return getStates(state);
+    }
+  );
 
   const renderedPictures = pictures.map((object) => {
     return (
@@ -26,6 +39,7 @@ const PicturesContainer = () => {
         key={object.id}
         image={object.urls.regular}
         description={object.alt_description}
+        id={object.id}
       />
     );
   });
@@ -49,7 +63,7 @@ const PicturesContainer = () => {
 
   return (
     <div className="pictures">
-      {isLoading ? <Loader message={`Searching for ${searchTerm}`} /> : null}
+      {isLoading ? <Loader message={`Searching for "${searchTerm}"`} /> : null}
       <div className={`pictures-container ${renderErrorClass()} `}>
         {renderPictures()}
       </div>

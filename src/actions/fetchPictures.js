@@ -11,7 +11,7 @@ const fetchPictures = (searchString) => {
         "https://api.unsplash.com/search/photos",
         {
           params: {
-            page: 1,
+            page: 12,
             query: searchString,
             per_page: 12,
             client_id: unsplashKey,
@@ -23,9 +23,9 @@ const fetchPictures = (searchString) => {
         type: types.FETCH_PICTURES,
         payload: response.data.results,
       });
-      throwPicturesError(false);
+      dispatch(throwPicturesError(false));
     } catch {
-      throwPicturesError(true);
+      dispatch(throwPicturesError(true));
     }
     dispatch(updateLoading(false));
   };
