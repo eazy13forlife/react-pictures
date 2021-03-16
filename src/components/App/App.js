@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SearchBar from "../Searchbar/SearchBar.js";
-import { useDispatch } from "react-redux";
 
-import { fetchPictures } from "../../actions/";
 import PicturesContainer from "../PicturesContainer/PicturesContainer.js";
+import usePictures from "../../custom_hooks/usePictures.js";
 import "./App.css";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPictures("dog"));
-  }, [dispatch]);
-
+  const pictures = usePictures("dog");
   return (
     <div className="app">
       <SearchBar />
